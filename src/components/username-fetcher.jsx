@@ -37,7 +37,7 @@ function CreateCards(props) {
                     const userData = await res.json();
                     await saveFile(`${username}.json`, userData);
                     localStorage.setItem("currentUser", username);
-                    await fetch(`${API_URL}/statsuser`, {
+                    await fetch("/statsuser", {
                         method: "POST",
                         headers: { "Content-Type": "application/json" },
                         body: JSON.stringify({ username })
@@ -57,7 +57,7 @@ function CreateCards(props) {
             if (typeof pgnfromuser === "string" && pgnfromuser.trim() !== "") {
                 try {
                     const currentUser = localStorage.getItem("currentUser");
-                    const dep = await fetch(`${API_URL}/pgnfromuser`, {
+                    const dep = await fetch("/pgnfromuser", {
                         method: "POST",
                         headers: { "Content-Type": "application/json" },
                         body: JSON.stringify({ pgnfromuser, username: currentUser })
