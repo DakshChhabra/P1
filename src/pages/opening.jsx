@@ -3,13 +3,12 @@ import Sidebars from '../components/sidebar';
 import './pages-css/opening.css';
 import { getUserOpeningStats } from '../utils/openingstats.js'; 
 
-const mockData = {
-  metrics: { gamesPlayed: 1247, winPercentage: 67.3, avgAccuracy: 88.2, avgBlunders: 2.1 }
-};
+const defaultMetrics = { gamesPlayed: 0, winPercentage: 0, avgAccuracy: 0, avgBlunders: 0 };
 
 const Opening = ({ username: propUsername }) => {
   const [openings, setOpenings] = useState([]);
   const [selectedOpening, setSelectedOpening] = useState(null);
+  const [metrics, setMetrics] = useState(defaultMetrics);
 
   const [activeFilter, setActiveFilter] = useState('winRate');
   const [searchQuery, setSearchQuery] = useState('');
@@ -39,9 +38,10 @@ const Opening = ({ username: propUsername }) => {
         }
         const data = await getUserOpeningStats(username);
         if (!mounted) return;
-        const list = data?.allOpenings || [];
-        setOpenings(list);
-        setSelectedOpening(list[0] || null);
+const list = data?.allOpenings || [];
+setOpenings(list);
+setSelectedOpening(list[0] || null);
+setMetrics(data?.metrics || defaultMetrics);
       } catch (e) {
         if (mounted) setError(e?.message || 'Failed to load openings');
       } finally {
@@ -189,7 +189,7 @@ const Opening = ({ username: propUsername }) => {
                   <div className="chess-opening-metric-icon">📊</div>
                   <div className="chess-opening-metric-content">
                     <span className="chess-opening-metric-value">
-                      {mockData.metrics.gamesPlayed.toLocaleString()}
+                      {metrics.gamesPlayed.toLocaleString()}
                     </span>
                     <span className="chess-opening-metric-label">Games Played</span>
                   </div>
@@ -198,7 +198,7 @@ const Opening = ({ username: propUsername }) => {
                 <div className="chess-opening-metric-card">
                   <div className="chess-opening-metric-icon">🎯</div>
                   <div className="chess-opening-metric-content">
-                    <span className="chess-opening-metric-value">{mockData.metrics.avgAccuracy}%</span>
+                    <span className="chess-opening-metric-value">{metrics.avgAccuracy}%</span>
                     <span className="chess-opening-metric-label">Avg Accuracy</span>
                   </div>
                 </div>
@@ -206,7 +206,7 @@ const Opening = ({ username: propUsername }) => {
                 <div className="chess-opening-metric-card">
                   <div className="chess-opening-metric-icon">📈</div>
                   <div className="chess-opening-metric-content">
-                    <span className="chess-opening-metric-value">{mockData.metrics.winPercentage}%</span>
+                    <span className="chess-opening-metric-value">{metrics.winPercentage}%</span>
                     <span className="chess-opening-metric-label">Win Rate</span>
                   </div>
                 </div>
@@ -214,7 +214,7 @@ const Opening = ({ username: propUsername }) => {
                 <div className="chess-opening-metric-card">
                   <div className="chess-opening-metric-icon">⚠️</div>
                   <div className="chess-opening-metric-content">
-                    <span className="chess-opening-metric-value">{mockData.metrics.avgBlunders}</span>
+                    <span className="chess-opening-metric-value">{metrics.avgBlunders}</span>
                     <span className="chess-opening-metric-label">Avg Blunders</span>
                   </div>
                 </div>
