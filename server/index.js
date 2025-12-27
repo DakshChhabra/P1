@@ -720,7 +720,7 @@ app.post("/gradePvMove", async (req, res) => {
     }); */
 
 
-    if (process.env.NODE_ENV !== 'production') {
+/*    if (process.env.NODE_ENV !== 'production') {
   app.use(
     '/',
     createProxyMiddleware({
@@ -738,7 +738,7 @@ app.get('/*', (req, res) => {
 });
 
 
-}
+} */
 
 
     app.listen(PORT, () => {
