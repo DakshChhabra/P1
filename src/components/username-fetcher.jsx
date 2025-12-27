@@ -23,7 +23,7 @@ function CreateCards(props) {
                     if (oldUsername && oldUsername !== username) {
                         await deleteFile(`${oldUsername}.json`);
                     }
-                    const res = await fetch(`${API_URL}/username`, {
+                    const res = await fetch("/username", {
                         method: "POST",
                         headers: { "Content-Type": "application/json" },
                         body: JSON.stringify({ username })
