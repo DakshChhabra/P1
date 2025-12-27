@@ -4,7 +4,6 @@
     import fs, { writeFile } from 'fs'
     import path from 'path';
     import { fileURLToPath } from 'url';
-    import { data } from 'react-router-dom';
     import { Chess } from 'chess.js';
     import { handlemovelist,handlemovelistPv } from './engine/logic.js';
     import stats from './engine/stats.js';
