@@ -397,7 +397,7 @@ app.post("/gradePvMove", async (req, res) => {
 
     app.post("/analyzewithstockfish",async (req,res) =>
     {
-        await new Promise(resolve => setTimeout(resolve, 200));
+        await new Promise(resolve => setTimeout(resolve, 500));
         const { username } = req.body;
         const sessionUser = getUserSession(username);
     sessionUser.storedanalysis = [];
@@ -419,6 +419,7 @@ app.post("/gradePvMove", async (req, res) => {
 
     app.post("/wasmresults",async (req,res) =>
     {
+        await new Promise(resolve => setTimeout(resolve, 100));
     console.log("wasmresults hit");
     const { username} = req.body;
     console.log("usernameinwasm results",username);
