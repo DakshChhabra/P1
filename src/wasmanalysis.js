@@ -33,7 +33,7 @@ async function analyte() {
     const analysisKey = sessionStorage.getItem("analysisKey");
     let stockfishService;
     try {
-        const response = await fetch(`${API_URL}/analyzewithstockfish`, {
+        const response = await fetch("/analyzewithstockfish", {
             method: "POST",
             headers: { 'Content-Type': "application/json" },
             body: JSON.stringify({ username, analysisKey })
@@ -91,7 +91,7 @@ async function analyte() {
             (JSON.stringify(payload).length / 1024 / 1024).toFixed(2)
         ); 
 
-        await fetch(`${API_URL}/wasmresults`, {
+        await fetch("/wasmresults", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
